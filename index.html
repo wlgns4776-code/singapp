@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lavender Music Card · YT Music (Large Cover)</title>
+<title>Lavender Music Card · YT Music</title>
 <style>
-:root{ --purple:#6c38f8; --purple2:#5a2de6; --bg:#f5f4ff; --ink:#fff; --ink2:#e8deff; --shadow:0 16px 32px rgba(73,43,170,.25) }
-*{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Pretendard,system-ui,sans-serif}
+:root{ --purple:#6c38f8; --purple2:#5a2de6; --bg:#f5f4ff; --ink:#fff; --ink2:#e8deff; --shadow:0 8px 20px rgba(73,43,170,.25) }
+*{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Pretendard,sans-serif}
 .wrap{max-width:860px;margin:22px auto;padding:0 14px}
 
 /* 헤더 + 드롭다운 */
@@ -28,37 +28,40 @@ details[open] summary .chev{transform:rotate(90deg)}
 /* 검색/결과 */
 .search{display:flex;gap:8px;margin:8px 0 14px}
 .search input{flex:1;height:42px;border-radius:12px;border:2px solid #d9d3ff;padding:0 12px;font-size:15px;background:#fff}
-.results{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;margin-bottom:16px}
+.results{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;margin-bottom:100px}
 .item{display:flex;gap:10px;align-items:center;padding:8px;border-radius:12px;border:1px solid #eee;background:#fff;cursor:pointer}
 .item img{width:56px;height:56px;border-radius:10px;object-fit:cover}
 .item .t{font-weight:700;font-size:13px}
 .item .s{font-size:12px;color:#666}
 
-/* 카드 */
-.card{display:flex;gap:16px;align-items:center;padding:18px;border-radius:22px;color:var(--ink);
-  background:linear-gradient(90deg,var(--purple),var(--purple2));box-shadow:var(--shadow);max-width:780px;margin:0 auto}
-.cover{width:160px;height:160px;border-radius:18px;overflow:hidden;flex:0 0 160px;box-shadow:0 10px 20px rgba(0,0,0,.2)}
+/* 플레이어 카드 (하단 고정) */
+.card{position:fixed;bottom:0;left:0;right:0;z-index:999;
+  display:flex;gap:16px;align-items:center;padding:16px 20px;
+  border-radius:20px 20px 0 0;color:var(--ink);
+  background:linear-gradient(90deg,var(--purple),var(--purple2));
+  box-shadow:0 -4px 14px rgba(0,0,0,.25);max-width:860px;margin:0 auto}
+.cover{width:90px;height:90px;border-radius:14px;overflow:hidden;flex:0 0 90px;box-shadow:0 5px 12px rgba(0,0,0,.25)}
 .cover img{width:100%;height:100%;object-fit:cover}
-.meta{flex:1;min-width:220px}
-.title{font-size:22px;font-weight:800;letter-spacing:.2px}
+.meta{flex:1;min-width:160px}
+.title{font-size:18px;font-weight:800;letter-spacing:.2px}
 .artist{margin-top:6px;font-size:12px;color:var(--ink2)}
-.controls{display:flex;gap:8px;align-items:center;margin:10px 0}
-.btn{width:38px;height:38px;border-radius:50%;border:0;background:#1b1a1f;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.play{width:46px;height:46px;border-radius:50%;background:#fff;color:#1b1a1f;font-weight:800}
-.btn[disabled]{opacity:.5;cursor:not-allowed}
-.wave{display:flex;align-items:flex-end;gap:4px;height:70px;opacity:.95}
-.bar{width:6px;background:rgba(255,255,255,.75);border-radius:6px;animation:up 1.2s ease-in-out infinite;transform-origin:bottom}
+.controls{display:flex;gap:8px;align-items:center;margin:8px 0}
+.btn{width:34px;height:34px;border-radius:50%;border:0;background:#1b1a1f;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px}
+.play{width:42px;height:42px;border-radius:50%;background:#fff;color:#1b1a1f;font-weight:800;font-size:16px}
+.wave{display:flex;align-items:flex-end;gap:3px;height:50px;opacity:.95}
+.bar{width:4px;background:rgba(255,255,255,.75);border-radius:6px;animation:up 1.2s ease-in-out infinite;transform-origin:bottom}
 .bar:nth-child(odd){animation-duration:1s}.bar:nth-child(3n){animation-duration:1.4s}
 @keyframes up{0%,100%{height:20%}50%{height:85%}}
 #player{width:0;height:0;overflow:hidden}
 .badge{font-size:11px;color:#f1e6ff;opacity:.9;margin-right:6px}
 
-/* 반응형 */
-@media (max-width:640px){
-  .cover{width:120px;height:120px;flex:0 0 120px}
-  .title{font-size:20px}
-  .wave{height:64px}
-}
+/* 볼륨 슬라이더 */
+.volbox{width:40px;height:90px;display:flex;align-items:center;justify-content:center;margin-left:8px}
+#vol{-webkit-appearance:slider-vertical;writing-mode:bt-lr;width:20px;height:80px;background:transparent}
+#vol::-webkit-slider-runnable-track{background:rgba(255,255,255,.35);border-radius:8px;width:6px;border:none}
+#vol::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:8px;border-radius:8px;background:#fff;margin-top:-2px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+#vol::-moz-range-track{background:rgba(255,255,255,.35);border-radius:8px}
+#vol::-moz-range-thumb{width:18px;height:8px;border-radius:8px;border:none;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25)}
 </style>
 </head>
 <body>
@@ -82,206 +85,71 @@ details[open] summary .chev{transform:rotate(90deg)}
     </div>
   </details>
 
-  <div class="search">
-    <input id="q" type="search" placeholder="노래/아티스트 검색 (예: 아이유 느리게 하는 일)">
-  </div>
-
+  <div class="search"><input id="q" type="search" placeholder="노래/아티스트 검색"></div>
   <div id="results" class="results"></div>
-
-  <!-- Player Card -->
-  <div id="card" class="card" style="display:none">
-    <div class="cover"><img id="art" alt="cover"></div>
-    <div class="meta">
-      <div class="title" id="title">제목</div>
-      <div class="artist"><span class="badge">SING 🎤</span><span id="artistTag">채널</span></div>
-      <div class="controls">
-        <button id="prevBtn" class="btn" title="Prev">&#9664;&#9664;</button>
-        <button id="playBtn" class="btn play" title="Play/Pause">▶</button>
-        <button id="nextBtn" class="btn" title="Next">&#9654;&#9654;</button>
-      </div>
-      <div class="wave" id="wave"></div>
-    </div>
-  </div>
-
-  <div id="player"></div>
 </div>
 
+<!-- Player Card -->
+<div id="card" class="card" style="display:none">
+  <div class="cover"><img id="art" alt="cover"></div>
+  <div class="meta">
+    <div class="title" id="title">제목</div>
+    <div class="artist"><span class="badge">SING 🎤</span><span id="artistTag">채널</span></div>
+    <div class="controls">
+      <button id="prevBtn" class="btn">&#9664;&#9664;</button>
+      <button id="playBtn" class="btn play">▶</button>
+      <button id="nextBtn" class="btn">&#9654;&#9654;</button>
+      <button id="muteBtn" class="btn" title="Mute">🔊</button>
+    </div>
+    <div class="wave" id="wave"></div>
+  </div>
+  <div class="volbox"><input id="vol" type="range" min="0" max="100" step="1" value="40" orient="vertical"></div>
+</div>
+
+<div id="player"></div>
+
 <script>
-/* ===== API Key (필수: 도메인 제한 설정 권장) ===== */
-const YOUTUBE_API_KEY = 'AIzaSyBpGXON0rj8kUagY32Gl6vUWiUDlpcsTD4';
+const YOUTUBE_API_KEY = 'YOUR_API_KEY';  // 프록시 방식 권장
+let currentList=[], currentIndex=-1, player,isPlaying=false;
+let defaultThumb='',customCover=null,customCoverLocked=false;
+const params=new URLSearchParams(location.search);
+const REGION=(params.get('region')||'KR').toUpperCase();
+const DEFAULT_VOLUME = Number(localStorage.getItem('yt_card_vol')||40);
 
-/* ===== State ===== */
-let currentList = [];
-let currentIndex = -1;
-let player, isPlaying = false;
-let defaultThumb = '';
-let customCover = null;     // URL/dataURL
-let customCoverLocked = false;
-const params = new URLSearchParams(location.search);
-const REGION = (params.get('region') || 'KR').toUpperCase();
-
-/* ===== Utils ===== */
-function debounce(fn, ms){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); }; }
-function $(s){ return document.querySelector(s); }
-function createBars(n=48){ const w=$('#wave'); w.innerHTML=''; for(let i=0;i<n;i++){const b=document.createElement('div'); b.className='bar'; b.style.height=(20+Math.random()*60)+'%'; w.appendChild(b);} }
+/* Utils */
+function $(s){return document.querySelector(s);}
+function createBars(n=40){const w=$('#wave');w.innerHTML='';for(let i=0;i<n;i++){const b=document.createElement('div');b.className='bar';b.style.height=(20+Math.random()*60)+'%';w.appendChild(b);}}
 
 /* 제목 정리 */
-function cleanBrackets(s){
-  s = s.replace(/\[[^\]]*\]/g,'');                                  // [ ... ]
-  s = s.replace(/[\(\{\<〈《（][^()\{}\<>〈〉《》（）]*[\)\}\>〉》）]/g,''); // (..), {..}, <..>, 〈..〉, 《..》, （..）
-  s = s.replace(/\s*\/\s*(official.*|lyrics?.*|audio.*|mv.*|music\s*video.*|live.*)$/ig,'');
-  s = s.replace(/\s*\|\s*.*$/,'');
-  s = s.replace(/\s{2,}/g,' ').trim();
-  return s;
-}
-function prettify(raw){
-  if(!raw) return {title:'',artist:''};
-  let s = cleanBrackets(raw);
-  const m = s.match(/^(.*?)[\-\–]\s*(.+)$/);          // artist - title
-  if(m){ return { title: cleanBrackets(m[2].trim()), artist: m[1].trim() }; }
-  return { title:s, artist:'' };
-}
+function cleanBrackets(s){s=s.replace(/\[[^\]]*\]/g,'');s=s.replace(/[\(\{\<〈《（][^()\{}\<>〈〉《》（）]*[\)\}\>〉》）]/g,'');s=s.replace(/\s*\/\s*(official.*|lyrics?.*|audio.*|mv.*|music\s*video.*|live.*)$/ig,'');s=s.replace(/\s*\|\s*.*$/,'');s=s.replace(/\s{2,}/g,' ').trim();return s;}
+function prettify(raw){if(!raw)return{title:'',artist:''};let s=cleanBrackets(raw);const m=s.match(/^(.*?)[\-\–]\s*(.+)$/);if(m){return{title:cleanBrackets(m[2].trim()),artist:m[1].trim()}}return{title:s,artist:''}}
 
-/* ===== YouTube API ===== */
-async function yt(endpoint, params){
-  const url = new URL('https://www.googleapis.com/youtube/v3/'+endpoint);
-  params.key = YOUTUBE_API_KEY;
-  Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));
-  const r = await fetch(url);
-  if(!r.ok) throw new Error('YouTube API '+r.status);
-  return r.json();
-}
+/* YouTube API */
+async function yt(endpoint,params){const url=new URL('https://www.googleapis.com/youtube/v3/'+endpoint);params.key=YOUTUBE_API_KEY;Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));const r=await fetch(url);if(!r.ok)throw new Error('YouTube API '+r.status);return r.json();}
+function isPlayable(v){if(!v)return false;if(v.status?.privacyStatus!=='public')return false;if(!v.status?.embeddable)return false;if(v.contentDetails?.contentRating?.ytRating==='ytAgeRestricted')return false;const rr=v.contentDetails?.regionRestriction;if(rr?.blocked&&rr.blocked.includes(REGION))return false;if(rr?.allowed&&!rr.allowed.includes(REGION))return false;return true;}
 
-/* 재생 가능 여부 필터 */
-function isPlayable(v){
-  if(!v) return false;
-  if(v.status?.privacyStatus !== 'public') return false;
-  if(!v.status?.embeddable) return false;
-  if(v.contentDetails?.contentRating?.ytRating === 'ytAgeRestricted') return false;
-  const rr = v.contentDetails?.regionRestriction;
-  if(rr?.blocked && rr.blocked.includes(REGION)) return false;
-  if(rr?.allowed && !rr.allowed.includes(REGION)) return false;
-  return true;
-}
+const doSearch=async()=>{const q=$('#q').value.trim();$('#results').innerHTML='';if(!q)return;const data=await yt('search',{part:'snippet',type:'video',maxResults:18,q,videoEmbeddable:'true',videoSyndicated:'true'});const ids=data.items.map(i=>i.id.videoId).join(',');if(!ids)return;const vinfo=await yt('videos',{part:'snippet,contentDetails,status',id:ids});const byId=Object.fromEntries(vinfo.items.map(v=>[v.id,v]));const playable=data.items.filter(it=>isPlayable(byId[it.id.videoId]));currentList=playable.map(it=>({id:it.id.videoId,title:it.snippet.title,artist:it.snippet.channelTitle,thumb:(it.snippet.thumbnails.high||it.snippet.thumbnails.default).url}));$('#results').innerHTML='';currentList.forEach((t,idx)=>{const pp=prettify(t.title);const line=pp.artist?`${pp.title} - ${pp.artist}`:pp.title;const div=document.createElement('div');div.className='item';div.innerHTML=`<img src="${t.thumb}"><div><div class="t">${line}</div><div class="s">${t.artist}</div></div>`;div.onclick=()=>selectTrack(idx);$('#results').appendChild(div);});};
+$('#q').addEventListener('input',doSearch);
 
-/* 검색 */
-const doSearch = debounce(async ()=>{
-  const q = $('#q').value.trim(); $('#results').innerHTML='';
-  if(!q) return;
+/* YT Player */
+function onYouTubeIframeAPIReady(){player=new YT.Player('player',{height:'0',width:'0',videoId:'',playerVars:{playsinline:1,rel:0,modestbranding:1},events:{onReady(){player.setVolume(DEFAULT_VOLUME);$('#vol').value=DEFAULT_VOLUME;},onStateChange(e){if(e.data===YT.PlayerState.PLAYING){isPlaying=true;$('#playBtn').textContent='⏸';}else{isPlaying=false;$('#playBtn').textContent='▶';}},onError(){if(currentIndex<currentList.length-1)selectTrack(currentIndex+1);}}});}
+window.onYouTubeIframeAPIReady=onYouTubeIframeAPIReady;const s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';document.body.appendChild(s);
 
-  const data = await yt('search',{
-    part:'snippet', type:'video', maxResults:18, q,
-    videoEmbeddable:'true', videoSyndicated:'true'
-  });
+/* Track */
+function applyCover(){$('#art').src=(customCoverLocked&&customCover)?customCover:defaultThumb;}
+function selectTrack(idx){const t=currentList[idx];if(!t)return;currentIndex=idx;$('#card').style.display='flex';defaultThumb=t.thumb;const pp=prettify(t.title);$('#title').textContent=pp.artist?`${pp.title} - ${pp.artist}`:pp.title;$('#artistTag').textContent=$('#channelInput').value||t.artist;createBars(36);if(player?.loadVideoById)player.loadVideoById(t.id);applyCover();}
 
-  const ids = data.items.map(i=>i.id.videoId).join(',');
-  if(!ids){ currentList=[]; return; }
+/* Controls */
+$('#playBtn').onclick=()=>{if(isPlaying)player.pauseVideo();else player.playVideo();}
+$('#prevBtn').onclick=()=>{if(currentIndex>0)selectTrack(currentIndex-1);}
+$('#nextBtn').onclick=()=>{if(currentIndex<currentList.length-1)selectTrack(currentIndex+1);}
+$('#muteBtn').onclick=()=>{if(!player)return;if(player.isMuted()){player.unMute();$('#muteBtn').textContent='🔊';}else{player.mute();$('#muteBtn').textContent='🔇';}}
 
-  // ★ contentRating은 contentDetails 안에 있음 → part에서 제외
-  const vinfo = await yt('videos',{ part:'snippet,contentDetails,status', id:ids });
-  const byId = Object.fromEntries(vinfo.items.map(v=>[v.id,v]));
+/* Volume */
+const volEl=$('#vol');volEl.value=DEFAULT_VOLUME;volEl.oninput=e=>{const v=Number(e.target.value);try{player.setVolume(v);}catch(_){}localStorage.setItem('yt_card_vol',String(v));};
 
-  const playable = data.items.filter(it => isPlayable(byId[it.id.videoId]));
-
-  const music=[], others=[];
-  for(const it of playable){
-    const v = byId[it.id.videoId];
-    const row = {
-      id: it.id.videoId,
-      title: it.snippet.title,
-      artist: it.snippet.channelTitle,
-      thumb: (it.snippet.thumbnails.high||it.snippet.thumbnails.medium||it.snippet.thumbnails.default).url
-    };
-    (v?.snippet?.categoryId==='10' ? music : others).push(row);
-  }
-  currentList = music.length ? music : others;
-  currentIndex = -1;
-
-  const box=$('#results'); box.innerHTML='';
-  currentList.forEach((t,idx)=>{
-    const pp = prettify(t.title);
-    const line = pp.artist ? `${pp.title} - ${pp.artist}` : pp.title;
-    const div=document.createElement('div'); div.className='item';
-    div.innerHTML = `<img src="${t.thumb}"><div><div class="t">${line}</div><div class="s">${t.artist}</div></div>`;
-    div.addEventListener('click', ()=>selectTrack(idx));
-    box.appendChild(div);
-  });
-},300);
-$('#q').addEventListener('input', doSearch);
-
-/* YT Iframe Player */
-function onYouTubeIframeAPIReady(){
-  player = new YT.Player('player',{
-    height:'0', width:'0', videoId:'',
-    playerVars:{playsinline:1,rel:0,modestbranding:1},
-    events:{
-      onStateChange(e){
-        if(e.data===YT.PlayerState.PLAYING){ isPlaying=true; $('#playBtn').textContent='⏸'; }
-        else if(e.data===YT.PlayerState.PAUSED || e.data===YT.PlayerState.ENDED){ isPlaying=false; $('#playBtn').textContent='▶'; }
-      },
-      onError(){ if(currentIndex < currentList.length-1) selectTrack(currentIndex+1); }
-    }
-  });
-}
-window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-const s=document.createElement('script'); s.src='https://www.youtube.com/iframe_api'; document.body.appendChild(s);
-
-/* 카드 렌더링 */
-function applyCover(){
-  $('#coverLock').style.display = customCoverLocked ? 'inline-block' : 'none';
-  $('#art').src = (customCoverLocked && customCover) ? customCover : defaultThumb;
-}
-function selectTrack(idx){
-  const t=currentList[idx]; if(!t) return; currentIndex=idx;
-  $('#card').style.display='flex';
-  defaultThumb = t.thumb;
-  const pp = prettify(t.title);
-  $('#title').textContent = pp.artist ? `${pp.title} - ${pp.artist}` : pp.title;
-  const manual = ($('#channelInput').value||'').trim();
-  $('#artistTag').textContent = manual || t.artist;
-  createBars(48);
-  if(player?.loadVideoById){ player.loadVideoById(t.id); }
-  applyCover();
-}
-
-/* 컨트롤 */
-$('#playBtn').addEventListener('click',()=>{ if(!player) return; if(isPlaying) player.pauseVideo(); else player.playVideo(); });
-$('#prevBtn').addEventListener('click',()=>{ if(currentIndex>0) selectTrack(currentIndex-1); });
-$('#nextBtn').addEventListener('click',()=>{ if(currentIndex<currentList.length-1) selectTrack(currentIndex+1); });
-
-/* 채널명 저장/복원 */
-const channelInput = $('#channelInput');
-const savedCh = localStorage.getItem('yt_card_channel'); if(savedCh) channelInput.value=savedCh;
-channelInput.addEventListener('input', ()=>{ localStorage.setItem('yt_card_channel', channelInput.value||''); if($('#card').style.display!=='none') $('#artistTag').textContent = channelInput.value || $('#artistTag').textContent; });
-
-/* 커버 교체 (URL/파일/원복) */
-$('#coverUrl').addEventListener('keydown', e=>{
-  if(e.key==='Enter'){
-    const url = e.target.value.trim();
-    if(url){ customCover=url; customCoverLocked=true; localStorage.setItem('yt_card_custom_cover',url); localStorage.setItem('yt_card_cover_locked','1'); applyCover(); }
-  }
-});
-$('#coverFile').addEventListener('change', e=>{
-  const f=e.target.files?.[0]; if(!f) return;
-  const reader=new FileReader();
-  reader.onload = ev => { customCover=ev.target.result; customCoverLocked=true; localStorage.setItem('yt_card_custom_cover',customCover); localStorage.setItem('yt_card_cover_locked','1'); applyCover(); };
-  reader.readAsDataURL(f);
-});
-$('#coverReset').addEventListener('click', ()=>{ customCover=null; customCoverLocked=false; localStorage.removeItem('yt_card_custom_cover'); localStorage.removeItem('yt_card_cover_locked'); applyCover(); });
-
-/* 공유용 URL 파라미터 (?channel=이름&cover=https://...&region=KR) */
-(function fromQuery(){
-  const ch = params.get('channel'); const cv = params.get('cover');
-  if(ch){ channelInput.value=ch; localStorage.setItem('yt_card_channel',ch); }
-  if(cv){ customCover=cv; customCoverLocked=true; localStorage.setItem('yt_card_custom_cover',cv); localStorage.setItem('yt_card_cover_locked','1'); }
-})();
-
-/* 새로고침 복원 */
-(function restore(){
-  const c = localStorage.getItem('yt_card_custom_cover');
-  const locked = localStorage.getItem('yt_card_cover_locked')==='1';
-  if(c){ customCover=c; customCoverLocked=locked; }
-})();
+/* Channel 저장 */
+const channelInput=$('#channelInput');channelInput.value=localStorage.getItem('yt_card_channel')||'';channelInput.oninput=()=>{localStorage.setItem('yt_card_channel',channelInput.value);if($('#card').style.display!=='none')$('#artistTag').textContent=channelInput.value;};
 </script>
 </body>
 </html>
